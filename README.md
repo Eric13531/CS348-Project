@@ -39,8 +39,8 @@ You can see it by visiting `http://127.0.0.1:8000/player_averages/?player_id=1`
 
 Here are the expected results:
 
-![Screenshot of List of Players]("screenshots/player_names_and_ids.png")
-![Screenshot of Player Averages]("screenshots/player_average.png")
+![Screenshot of List of Players](screenshots/player_names_and_ids.png)
+![Screenshot of Player Averages](screenshots/player_average.png)
 
 ### 3. Start the Frontend
 
