@@ -4,4 +4,4 @@
 SELECT *
 FROM PlayerStats
 WHERE game_id = x
-ORDER BY points DESC, rebounds DESC, assists DESC, steals DESC, blocks DESC;
+ORDER BY points DESC, three_p DESC, assists DESC, steals DESC, blocks DESC;

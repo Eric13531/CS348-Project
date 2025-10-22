@@ -1,6 +1,3 @@
--- SQL query for feature 2
--- See team’s win loss record across all the games they played in the regular season
-
 SELECT
     t.team_id,
     t.name,
@@ -9,7 +6,5 @@ SELECT
 FROM Team t
 JOIN Game g
     ON t.team_id IN (g.home_team, g.away_team)
-WHERE t.team_id = x
+WHERE t.team_id = 1
 GROUP BY t.team_id, t.name, t.wins;
-
-

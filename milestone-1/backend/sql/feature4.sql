@@ -2,7 +2,9 @@
 -- See players that played on a specific team during the given season
 
 SELECT *
-FROM Player
-WHERE player_id IN (SELECT player_id FROM TeamMember WHERE team_id = x)
+FROM Player NATURAL JOIN (
+    SELECT player_id FROM TeamMember WHERE team_id = 1
+) AS q;
+
 
 
