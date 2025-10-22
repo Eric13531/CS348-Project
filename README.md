@@ -37,6 +37,8 @@ You can also see the player_id and player names of all players in our sample dat
 We have implemented our first feature, which shows the averages of a player given player_id, 
 You can see it by visiting `http://127.0.0.1:8000/player_averages/?player_id=1`
 
+Running the React app and setting the app URL to `http://127.0.0.1:8000` will run the frontend
+
 Here are the expected results:
 
 ![Screenshot of Players and Stats](screenshots/player_stats.png)
