@@ -11,8 +11,9 @@ p.name,
 FROM PlayerStats ps
 JOIN Player p
     ON p.player_id = ps.player_id
+WHERE ps.player_id = 1
 GROUP BY ps.player_id, p.name
-INTO OUTFILE 'file_output_placeholder'
+INTO OUTFILE 'file_output_location'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';

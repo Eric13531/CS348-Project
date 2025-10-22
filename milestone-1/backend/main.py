@@ -42,9 +42,26 @@ def get_connection():
     except Error as e:
         print(f"Databaes connection failed with error: {e}")
         return None
+    
+@app.get("/players/")
+async def get_players():
+    conn = get_connection()
+    
+    sql = "SELECT player_id, name FROM Player ORDER BY player_id;"
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+            
+    return JSONResponse(content={"data": results})
 
 @app.get("/player_averages/")
-async def get_players():
+async def get_players(player_id: int):
     conn = get_connection()
     with open("sql/feature1.sql", "r") as f:
         sql = f.read()
@@ -59,7 +76,7 @@ async def get_players():
         raise HTTPException(status_code=500, detail="Database connection failed")
     
     cursor = conn.cursor(dictionary=True)
-    cursor.execute(sql)
+    cursor.execute(sql, (player_id,))
     results = cursor.fetchall()
     cursor.close()
     conn.close()

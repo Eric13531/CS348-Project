@@ -32,8 +32,15 @@ Currently, our application only supports seeing all the stat averages of the pla
 We have a sample feature defined in `backend/sql/feature1_sample.sql` which produced the output file 
 `backend/sql/feature1_output.csv`, a similar function is coded and accessible through our backend.
 
-We have implemented our first feature, which shows the averages of every player, 
-You can see it by visiting `http://127.0.0.1:8000/player_averages/`
+You can also see the player_id and player names of all players in our sample database using `http://127.0.0.1:8000/players/`
+
+We have implemented our first feature, which shows the averages of a player given player_id, 
+You can see it by visiting `http://127.0.0.1:8000/player_averages/?player_id=1`
+
+Here are the expected results:
+
+![Screenshot of List of Players]("screenshots/player_names_and_ids.png")
+![Screenshot of Player Averages]("screenshots/player_average.png")
 
 ### 3. Start the Frontend
 

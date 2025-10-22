@@ -11,4 +11,5 @@ p.name,
 FROM PlayerStats ps
 JOIN Player p
     ON p.player_id = ps.player_id
+WHERE ps.player_id = %s
 GROUP BY ps.player_id, p.name;
