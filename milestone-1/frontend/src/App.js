@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import './App.css';
+import PlayerList from "./components/PlayerList";
+
 
 function App() {
   const [test, setTest] = useState("");
@@ -13,8 +15,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React and FastAPI app</h1>
+      <h1>NBA Player Stats</h1>
       <p>Backend test: {test}</p>
+      <PlayerList />
     </div>
   );
 }
