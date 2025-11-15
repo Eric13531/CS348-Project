@@ -23,10 +23,10 @@ const PlayerStats = ({ playerId }) => {
     <div style={{ display: "flex", "flex-wrap": "wrap", gap: "10px", "justify-content": "center" }}>
       <h3>{stats.name}'s Averages:</h3>
       <ul style={{ "list-style-type": "none", marginTop: "20px", display: "flex"}}>
-        <li style = {{margin: "3px", marginRight: "10px"}}>Points: {stats.avg_points.toFixed(1)}</li>
-        <li style = {{margin: "3px", marginRight: "10px"}}>Assists: {stats.avg_assists.toFixed(1)}</li>
-        <li style = {{margin: "3px", marginRight: "10px"}}>Steals: {stats.avg_steals.toFixed(1)}</li>
-        <li style = {{margin: "3px", marginRight: "10px"}}>Blocks: {stats.avg_blocks.toFixed(1)}</li>
+        <li style = {{margin: "3px", marginRight: "10px"}}>Points: {stats?.avg_points?.toFixed(1) ?? "N/A"}</li>
+        <li style = {{margin: "3px", marginRight: "10px"}}>Assists: {stats?.avg_assists?.toFixed(1) ?? "N/A"}</li>
+        <li style = {{margin: "3px", marginRight: "10px"}}>Steals: {stats?.avg_steals?.toFixed(1) ?? "N/A"}</li>
+        <li style = {{margin: "3px", marginRight: "10px"}}>Blocks: {stats?.avg_blocks?.toFixed(1) ?? "N/A"}</li>
       </ul>
     </div>
   );

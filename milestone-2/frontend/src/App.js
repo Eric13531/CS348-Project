@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import './App.css';
 import PlayerList from "./components/PlayerList";
+import TeamList from "./components/TeamList";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <h1>NBA Player Stats</h1>
       <p>Backend test: {test}</p>
       <PlayerList />
+      <TeamList />
     </div>
   );
 }

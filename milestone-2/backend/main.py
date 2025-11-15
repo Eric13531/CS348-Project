@@ -32,7 +32,7 @@ DB_CONFIG = {
     "host": 'localhost',
     "user": 'root',
     "password": os.getenv("DB_PASSWORD"),
-    "database": 'cs348_nba',
+    "database": 'cs348_nba_prod',
 }
 
 def get_connection():
@@ -47,7 +47,29 @@ def get_connection():
 async def get_players():
     conn = get_connection()
     
-    sql = "SELECT player_id, name FROM Player ORDER BY player_id;"
+    # sql = "SELECT player_id, name FROM Player ORDER BY player_id;"
+    sql = """SELECT p.player_id, p.name
+            FROM Player p
+            INNER JOIN PlayerStats ps ON p.player_id = ps.player_id
+            GROUP BY p.player_id, p.name
+            ORDER BY p.player_id;"""
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql)
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+            
+    return JSONResponse(content={"data": results})
+
+@app.get("/teams/")
+async def get_teams():
+    conn = get_connection()
+    
+    sql = "SELECT team_id, name FROM Team ORDER BY team_id;"
     
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")
@@ -85,5 +107,38 @@ async def get_players(player_id: int):
         for key, value in row.items():
             if isinstance(value, Decimal):
                 row[key] = float(value)
+            
+    return JSONResponse(content={"data": results})
+
+@app.get("/team_record/")
+async def get_teams(team_id: int):
+    conn = get_connection()
+    with open("sql/features/feature2.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    print(sql)
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (team_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    print(results)
+    
+    results[0]['wins'] = int(results[0]['wins'])
+    results[0]['losses'] = int(results[0]['losses'])
+    
+    # for row in results:
+    #     for key, value in row.items():
+    #         if isinstance(value, Decimal):
+    #             row[key] = float(value)
             
     return JSONResponse(content={"data": results})
