@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../utils/api";
 
-const TeamStats = ({ teamId }) => {
+const TeamRecord = ({ teamId, teamName }) => {
   const [record, setRecord] = useState(null);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const TeamStats = ({ teamId }) => {
   );
 };
 
-export default TeamStats;
+export default TeamRecord;

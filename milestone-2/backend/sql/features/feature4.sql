@@ -3,7 +3,7 @@
 
 SELECT *
 FROM Player NATURAL JOIN (
-    SELECT player_id FROM TeamMember WHERE team_id = 1
+    SELECT player_id FROM TeamMember WHERE team_id = %s
 ) AS q;
 
 

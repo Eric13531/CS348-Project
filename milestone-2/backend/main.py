@@ -83,7 +83,7 @@ async def get_teams():
     return JSONResponse(content={"data": results})
 
 @app.get("/player_averages/")
-async def get_players(player_id: int):
+async def get_player_averages(player_id: int):
     conn = get_connection()
     with open("sql/features/feature1.sql", "r") as f:
         sql = f.read()
@@ -111,7 +111,7 @@ async def get_players(player_id: int):
     return JSONResponse(content={"data": results})
 
 @app.get("/team_record/")
-async def get_teams(team_id: int):
+async def get_team_record(team_id: int):
     conn = get_connection()
     with open("sql/features/feature2.sql", "r") as f:
         sql = f.read()
@@ -135,6 +135,41 @@ async def get_teams(team_id: int):
     
     results[0]['wins'] = int(results[0]['wins'])
     results[0]['losses'] = int(results[0]['losses'])
+    
+    # for row in results:
+    #     for key, value in row.items():
+    #         if isinstance(value, Decimal):
+    #             row[key] = float(value)
+            
+    return JSONResponse(content={"data": results})
+
+
+@app.get("/team_roster/")
+async def get_team_roster(team_id: int):
+    conn = get_connection()
+    
+    with open("sql/features/feature4.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    print(sql)
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (team_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    print(results)
+    
+    # results[0]['wins'] = int(results[0]['wins'])
+    # results[0]['losses'] = int(results[0]['losses'])
     
     # for row in results:
     #     for key, value in row.items():
