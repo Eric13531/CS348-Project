@@ -49,8 +49,8 @@ Running the React app and setting the app URL to `http://127.0.0.1:8000` will ru
 
 Here are the expected results:
 
-![Screenshot of Players and Stats](screenshots/m2_page1.png)
 ![Screenshot of Players and Stats](screenshots/m2_page2.png)
+![Screenshot of Players and Stats](screenshots/m2_page1.png)
 Updated screenshots of the new features can be found in the report
 
 ### 3. Start the Frontend
