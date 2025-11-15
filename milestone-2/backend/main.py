@@ -63,7 +63,7 @@ async def get_players():
 @app.get("/player_averages/")
 async def get_players(player_id: int):
     conn = get_connection()
-    with open("sql/feature1.sql", "r") as f:
+    with open("sql/features/feature1.sql", "r") as f:
         sql = f.read()
     
     sql = "\n".join(
