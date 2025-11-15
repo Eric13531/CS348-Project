@@ -1,8 +1,8 @@
-CREATE DATABASE IF NOT EXISTS cs348_nba
+CREATE DATABASE IF NOT EXISTS cs348_nba_prod
     CHARACTER SET utf8mb4 -- Western characters
     COLLATE utf8mb4_0900_ai_ci; -- So that comparisons are not case sensitive
 
-USE cs348_nba;
+USE cs348_nba_prod;
 
 CREATE TABLE Team (
     team_id INT PRIMARY KEY,
