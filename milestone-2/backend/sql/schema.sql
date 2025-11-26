@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS cs348_nba
 USE cs348_nba;
 
 CREATE TABLE Team (
-    team_id INT PRIMARY KEY,
+    team_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     city VARCHAR(100) NOT NULL,
     abbreviation VARCHAR(100) NOT NULL,
@@ -18,9 +18,9 @@ CREATE TABLE Team (
 );
 
 CREATE TABLE Player (
-    player_id INT PRIMARY KEY,
+    player_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    number INT NULL,
+    number INT NOT NULL,
     height VARCHAR(100) NULL,
     position VARCHAR(100) NULL,
     birthdate DATE NULL
@@ -36,7 +36,7 @@ CREATE TABLE TeamMember (
 );
 
 CREATE TABLE Game (
-    game_id INT PRIMARY KEY,
+    game_id INT PRIMARY KEY AUTO_INCREMENT,
     date DATE NOT NULL,
     home_team INT NOT NULL,
     away_team INT NOT NULL,
@@ -62,4 +62,3 @@ CREATE TABLE PlayerStats (
     FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE,
     FOREIGN KEY (player_id) REFERENCES Player(player_id) ON DELETE CASCADE
 );
-

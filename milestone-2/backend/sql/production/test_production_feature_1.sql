@@ -13,7 +13,7 @@ JOIN Player p
     ON p.player_id = ps.player_id
 WHERE ps.player_id = 2544
 GROUP BY ps.player_id, p.name
-INTO OUTFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/test_product_features_1.csv'
+INTO OUTFILE 'output_file_location'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n';

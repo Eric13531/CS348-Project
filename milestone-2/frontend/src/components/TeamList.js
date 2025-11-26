@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../utils/api";
 import TeamRecord from "./TeamRecord";
+import TeamRoster from "./TeamRoster";
 
 const TeamList = () => {
   const [teams, setTeams] = useState([]);
@@ -34,7 +35,10 @@ const TeamList = () => {
       </div>
 
       {selectedTeam && (
+        <>
         <TeamRecord teamId={selectedTeam.team_id} teamName={selectedTeam.name} />
+        <TeamRoster teamId={selectedTeam.team_id} teamName={selectedTeam.name} />
+        </>
       )}
     </div>
   );
