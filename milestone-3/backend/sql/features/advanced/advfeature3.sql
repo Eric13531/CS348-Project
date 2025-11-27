@@ -1,3 +1,5 @@
+-- Returns players with similar stats to the given player
+
 SELECT
     aps2.player_id,
     aps2.name,

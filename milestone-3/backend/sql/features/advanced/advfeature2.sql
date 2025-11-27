@@ -1,3 +1,5 @@
+-- Advanced Player Stats
+
 CREATE VIEW AdvancedPlayerStats AS
 SELECT
     p.player_id,

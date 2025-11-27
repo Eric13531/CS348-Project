@@ -1,3 +1,5 @@
+-- All teams that the given player has not scored against
+
 SELECT
     t.team_id,
     t.name AS team_name,
