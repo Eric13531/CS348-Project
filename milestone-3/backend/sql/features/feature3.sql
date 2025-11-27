@@ -4,5 +4,5 @@
 SELECT ps.*, p.name AS player_name
 FROM PlayerStats ps
 JOIN Player p ON ps.player_id = p.player_id
-WHERE ps.game_id = x
+WHERE ps.game_id = %s
 ORDER BY ps.points DESC, ps.three_p DESC, ps.assists DESC, ps.steals DESC, ps.blocks DESC;

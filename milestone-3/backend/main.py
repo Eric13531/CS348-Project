@@ -47,7 +47,6 @@ def get_connection():
 async def get_players():
     conn = get_connection()
     
-    # sql = "SELECT player_id, name FROM Player ORDER BY player_id;"
     sql = """SELECT p.player_id, p.name
             FROM Player p
             INNER JOIN PlayerStats ps ON p.player_id = ps.player_id
@@ -113,8 +112,6 @@ async def get_games():
     results = cursor.fetchall()
     cursor.close()
     conn.close()
-    
-    print(results)
 
     return {"data": results}
 
@@ -128,8 +125,6 @@ async def get_player_averages(player_id: int):
     sql = "\n".join(
         line for line in sql.splitlines()
     )
-    
-    print(sql)
     
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")
@@ -157,8 +152,6 @@ async def get_team_record(team_id: int):
         line for line in sql.splitlines()
     )
     
-    print(sql)
-    
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")
     
@@ -167,8 +160,6 @@ async def get_team_record(team_id: int):
     results = cursor.fetchall()
     cursor.close()
     conn.close()
-    
-    print(results)
     
     results[0]['wins'] = int(results[0]['wins'])
     results[0]['losses'] = int(results[0]['losses'])
@@ -184,21 +175,12 @@ async def get_team_record(team_id: int):
 async def get_team_matchups(team_id1: int, team_id2: int):
     conn = get_connection()
     
-    sql = """
-        SELECT
-            g.game_id,
-            g.date,
-            ht.name AS home_team,
-            at.name AS away_team,
-            g.home_score,
-            g.away_score
-        FROM Game g
-        JOIN Team ht ON g.home_team = ht.team_id
-        JOIN Team at ON g.away_team = at.team_id
-        WHERE (ht.team_id = %s AND at.team_id = %s)
-        OR (ht.team_id = %s AND at.team_id = %s)
-        ORDER BY g.date;
-    """
+    with open("sql/features/feature5.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
     
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")
@@ -223,8 +205,6 @@ async def get_team_roster(team_id: int):
         line for line in sql.splitlines()
     )
     
-    print(sql)
-    
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")
     
@@ -233,8 +213,6 @@ async def get_team_roster(team_id: int):
     results = cursor.fetchall()
     cursor.close()
     conn.close()
-    
-    print(results)
     
     # results[0]['wins'] = int(results[0]['wins'])
     # results[0]['losses'] = int(results[0]['losses'])
@@ -249,14 +227,13 @@ async def get_team_roster(team_id: int):
 @app.get("/game_leaders/")
 async def get_game_leaders(game_id: int):
     conn = get_connection()
-
-    sql = """
-        SELECT ps.*, p.name AS player_name
-        FROM PlayerStats ps
-        JOIN Player p ON ps.player_id = p.player_id
-        WHERE ps.game_id = %s
-        ORDER BY ps.points DESC, ps.three_p DESC, ps.assists DESC, ps.steals DESC, ps.blocks DESC;
-    """
+    
+    with open("sql/features/feature3.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
     
     if conn is None:
         raise HTTPException(status_code=500, detail="Database connection failed")

@@ -11,6 +11,6 @@ SELECT
 FROM Game g
 JOIN Team ht ON g.home_team = ht.team_id
 JOIN Team at ON g.away_team = at.team_id
-WHERE (ht.abbreviation = 'TOR' AND at.abbreviation = 'BOS')
-   OR (ht.abbreviation = 'BOS' AND at.abbreviation = 'TOR')
+WHERE (ht.team_id = %s AND at.team_id = %s)
+   OR (ht.team_id = %s AND at.team_id = %s)
 ORDER BY g.date;
