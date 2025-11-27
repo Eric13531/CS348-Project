@@ -27,20 +27,20 @@ const TeamRoster = ({ teamId, teamName }) => {
     <div>
       <h3>{teamName}'s Roster:</h3>
       <div
-          style={{
+        style={{
           display: "flex",
           flexWrap: "wrap",
           gap: "6px",
-          marginTop: "-4px",
+          marginTop: "10px",
           paddingLeft: "50px",
-          paddingRight: "50px"
+          paddingRight: "50px",
+          justifyContent: "center",
+          textAlign: "center"
         }}
       >
-      {/* <ul style={{ "list-style-type": "none", marginTop: "-10px", display: "flex", flexDirection: "column"}}> */}
         {roster.map((player, idx) => (
           <span key = {player.player_id}>{player.name}{idx < roster.length - 1 ? "," : ""}</span>
         ))}
-      {/* </ul> */}
       </div>
     </div>
   );

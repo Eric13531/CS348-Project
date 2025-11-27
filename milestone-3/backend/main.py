@@ -117,7 +117,7 @@ async def get_games():
 
 
 @app.get("/player_averages/")
-async def get_player_averages(player_id: int):
+async def get_player_advanced_stats(player_id: int):
     conn = get_connection()
     with open("sql/features/feature1.sql", "r") as f:
         sql = f.read()
@@ -141,6 +141,127 @@ async def get_player_averages(player_id: int):
                 row[key] = float(value)
             
     return JSONResponse(content={"data": results})
+
+@app.get("/player_advanced/")
+async def get_player_advanced(player_id: int):
+    conn = get_connection()
+    
+    sql = """
+        SELECT *
+        FROM AdvancedPlayerStats
+        WHERE player_id = %s;
+    """
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (player_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    for row in results:
+        for key, value in row.items():
+            if isinstance(value, Decimal):
+                row[key] = float(value)
+            
+    return JSONResponse(content={"data": results})
+
+@app.get("/similar_players/")
+async def get_similar_players(player_id: int):
+    conn = get_connection()
+    
+    with open("sql/features/advanced/advfeature3.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (player_id, ))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    for row in results:
+        for key, value in row.items():
+            if isinstance(value, Decimal):
+                row[key] = float(value)
+
+    return JSONResponse({"data": results})
+
+@app.get("/player_not_score/")
+async def get_player_not_score(player_id: int):
+    conn = get_connection()
+    with open("sql/features/advanced/advfeature5.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (player_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    for row in results:
+        for key, value in row.items():
+            if isinstance(value, Decimal):
+                row[key] = float(value)
+            
+    return {"data": results}
+
+@app.get("/player_best_games/")
+async def get_player_best_games(player_id: int):
+    conn = get_connection()
+    with open("sql/features/advanced/advfeature6.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (player_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+            
+    return {"data": results}
+
+@app.get("/player_stats_last_3/")
+async def get_player_stats_last_3(player_id: int):
+    conn = get_connection()
+    with open("sql/features/advanced/advfeature8.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (player_id,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+            
+    return {"data": results}
 
 @app.get("/team_record/")
 async def get_team_record(team_id: int):

@@ -25,13 +25,13 @@ const TeamMatchups = ({ teamId1, teamName1, teamId2, teamName2 }) => {
 
   return (
     <div style={{ marginTop: "12px" }}>
-          <h3>
+          <h2>
             {matchups[0]['home_team']} vs {matchups[0]['away_team']}
-          </h3>
+          </h2>
           <ul style={{ listStyleType: "none", padding: 0 }}>
             {matchups.map((game) => (
               <li key={game.game_id} style={{ marginBottom: "4px" }}>
-                {game.date} – {game.away_team} @ {game.home_team} ({game.away_score}–{game.home_score})
+                {game.date} -- {game.away_team} @ {game.home_team} ({game.away_score} -- {game.home_score})
               </li>
             ))}
           </ul>

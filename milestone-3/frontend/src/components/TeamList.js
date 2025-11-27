@@ -30,8 +30,10 @@ const TeamList = () => {
       <button
         type="button"
         onClick={() => setIsListOpen((prev) => !prev)}
+        
         style={{
-          marginBottom: "10px",
+          display: "block",
+          margin: "10px auto",
           fontSize: "20px"
         }}
         aria-expanded={isListOpen}
@@ -50,6 +52,19 @@ const TeamList = () => {
         ))}
       </div>
       )}
+      <button
+        type="button"
+        onClick={() => setIsListOpen((prev) => !prev)}
+        
+        style={{
+          display: "block",
+          margin: "10px auto",
+          fontSize: "20px"
+        }}
+        aria-expanded={isListOpen}
+      >
+        {isListOpen ? "Hide team list ▲" : "Show team list ▼"}
+      </button>
 
       {selectedTeam && (
         <>

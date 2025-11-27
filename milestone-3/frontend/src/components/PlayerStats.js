@@ -20,9 +20,9 @@ const PlayerStats = ({ playerId }) => {
   if (!stats) return <p>Loading stats...</p>;
 
   return (
-    <div style={{ display: "flex", "flex-wrap": "wrap", gap: "10px", "justify-content": "center" }}>
+    <div style={{ marginTop: "10px", "textAlign": "center" }}>
       <h3>{stats.name}'s Averages:</h3>
-      <ul style={{ "list-style-type": "none", marginTop: "20px", display: "flex"}}>
+      <ul style={{ "list-style-type": "none", margin: 0, padding: 0, display: "flex", justifyContent: "center"}}>
         <li style = {{margin: "3px", marginRight: "10px"}}>Points: {stats?.avg_points?.toFixed(1) ?? "N/A"}</li>
         <li style = {{margin: "3px", marginRight: "10px"}}>Assists: {stats?.avg_assists?.toFixed(1) ?? "N/A"}</li>
         <li style = {{margin: "3px", marginRight: "10px"}}>Steals: {stats?.avg_steals?.toFixed(1) ?? "N/A"}</li>

@@ -11,7 +11,7 @@ SELECT
 FROM AdvancedPlayerStats aps_target
 JOIN AdvancedPlayerStats aps2
     ON aps2.player_id <> aps_target.player_id
-WHERE aps_target.player_id = %s
+WHERE aps_target.name = 'LeBron James'
 
 ORDER BY points_diff ASC
 LIMIT 10;

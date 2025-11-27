@@ -27,7 +27,8 @@ const GameList = () => {
         type="button"
         onClick={() => setIsListOpen((prev) => !prev)}
         style={{
-          marginBottom: "10px",
+          display: "block",
+          margin: "10px auto",
           fontSize: "20px"
         }}
         aria-expanded={isListOpen}
@@ -46,6 +47,19 @@ const GameList = () => {
         ))}
       </div>
       )}
+
+      <button
+        type="button"
+        onClick={() => setIsListOpen((prev) => !prev)}
+        style={{
+          display: "block",
+          margin: "10px auto",
+          fontSize: "20px"
+        }}
+        aria-expanded={isListOpen}
+      >
+        {isListOpen ? "Hide game list ▲" : "Show game list ▼"}
+      </button>
 
       {selectedGame && (
         <GameStats gameId={selectedGame.game_id}/>
