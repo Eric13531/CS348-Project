@@ -24,6 +24,6 @@ JOIN (
 ) AS season
     ON season.player_id = ps.player_id
 WHERE p.player_id = %s
-AND ps.points - season.avg_pts_per_game > 10
+AND ps.points - season.avg_pts_per_game > 5
 ORDER BY diff_from_season_avg DESC
 LIMIT 10;
