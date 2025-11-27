@@ -8,19 +8,13 @@ from mysql.connector import Error
 
 load_dotenv()
 
-# nba_players = players.get_players()
-# print(nba_players[:5])
-
-# Only consider 25-26 season for now
+# Only consider 24-25 season for now
 
 seasons = ['2024-25']
 
 for season in seasons:
 
     logs = LeagueGameLog(season=season).get_normalized_dict()['LeagueGameLog']
-    # print(logs[:5])
-
-    # print([log for log in logs if int(log['GAME_ID']) == 22500147])
 
     games = {}
 
@@ -82,28 +76,5 @@ for season in seasons:
 
     for game_id, g in games.items():
         cursor.execute(g_sql, (game_id, g['date'], g['home_team'], g['away_team'], g['home_score'], g['away_score']))
-        # try:
-        #     info = CommonPlayerInfo(player_id=player_id)
-        #     data = info.get_normalized_dict()["CommonPlayerInfo"][0]
-        #     # print("\n\n\n")
-        #     # print(data)
-
-        #     number = int(data["JERSEY"]) if data["JERSEY"] else None
-        #     height = data["HEIGHT"]
-        #     position = data["POSITION"]
-        #     birthdate = data["BIRTHDATE"].split("T")[0] if data["BIRTHDATE"] else None
-
-        #     # cursor.execute(p_sql, (player_id, name, number, height, position, birthdate))
-
-        #     # time.sleep(0.4)
-            
-        #     cursor.execute(p_sql, (player_id, name, number, height, position, birthdate))
-        
-        # except Exception as e:
-        #     print(f"Failed for {name} with error: {e}")
-
-        
-        # print('added', abbreviation)
         
     conn.commit()
-

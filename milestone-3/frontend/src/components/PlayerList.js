@@ -5,6 +5,7 @@ import PlayerStats from "./PlayerStats";
 const PlayerList = () => {
   const [players, setPlayers] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
+  const [isListOpen, setIsListOpen] = useState(true);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -22,6 +23,18 @@ const PlayerList = () => {
   return (
     <div>
       <h2>Players</h2>
+      <button
+        type="button"
+        onClick={() => setIsListOpen((prev) => !prev)}
+        style={{
+          marginBottom: "10px",
+          fontSize: "20px"
+        }}
+        aria-expanded={isListOpen}
+      >
+        {isListOpen ? "Hide player list ▲" : "Show player list ▼"}
+      </button>
+      {isListOpen && (
       <div style={{ display: "flex", "flex-wrap": "wrap", gap: "10px", "justify-content": "center" }}>
         {players.map((player) => (
           <button
@@ -32,6 +45,7 @@ const PlayerList = () => {
           </button>
         ))}
       </div>
+      )}
 
       {selectedPlayer && (
         <PlayerStats playerId={selectedPlayer.player_id} playerName={selectedPlayer.name} />

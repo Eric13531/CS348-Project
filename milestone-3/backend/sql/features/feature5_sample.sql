@@ -1,3 +1,6 @@
+-- SQL query for feature 5
+-- See games played between two given teams, and information about them
+
 SELECT
 	g.game_id,
     g.date,

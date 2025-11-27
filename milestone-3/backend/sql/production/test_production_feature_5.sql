@@ -1,6 +1,3 @@
--- SQL query for feature 5
--- See games played between two given teams, and information about them
-
 SELECT
 	g.game_id,
     g.date,
@@ -13,4 +10,8 @@ JOIN Team ht ON g.home_team = ht.team_id
 JOIN Team at ON g.away_team = at.team_id
 WHERE (ht.abbreviation = 'TOR' AND at.abbreviation = 'BOS')
    OR (ht.abbreviation = 'BOS' AND at.abbreviation = 'TOR')
-ORDER BY g.date;
+ORDER BY g.date
+INTO OUTFILE 'output_file_location'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';

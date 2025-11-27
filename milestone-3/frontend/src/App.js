@@ -3,6 +3,7 @@ import axios from "axios";
 import './App.css';
 import PlayerList from "./components/PlayerList";
 import TeamList from "./components/TeamList";
+import GameList from "./components/GameList";
 
 
 function App() {
@@ -16,10 +17,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>NBA Player Stats</h1>
+      <h1>NBA Player Stats 2024-25</h1>
       <p>Backend test: {test}</p>
       <PlayerList />
       <TeamList />
+      <GameList/>
     </div>
   );
 }
