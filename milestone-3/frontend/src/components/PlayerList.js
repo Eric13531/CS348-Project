@@ -12,6 +12,10 @@ const PlayerList = () => {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [isListOpen, setIsListOpen] = useState(true);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState(null);
+
+
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
@@ -25,9 +29,69 @@ const PlayerList = () => {
     fetchPlayers();
   }, []);
 
+  const handleSearchSubmit = async (e) => {
+    e.preventDefault();
+    const trimmed = searchQuery.trim();
+    if (!trimmed || trimmed.length < 3) {
+      setSearchResults(null);
+      return;
+    }
+
+    try {
+      const res = await api.get(`/player_search/?query=${searchQuery}`);
+      setSearchResults(res.data.data || []);
+    } catch (err) {
+      console.error("Error searching players:", err);
+    }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setSearchResults(null);
+  }
+
   return (
     <div>
       <h2>Players</h2>
+      <form
+        onSubmit={handleSearchSubmit}
+        style={{ textAlign: "center", marginBottom: "10px" }}
+      >
+        <input
+          type="text"
+          value={searchQuery}
+          placeholder="Search player by name"
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{ padding: "5px", fontSize: "16px"}}
+        />
+        <button
+          type="submit"
+          style={{ marginLeft: "8px", fontSize: "16px" }}
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          onClick={handleClearSearch}
+          style={{ marginLeft: "8px", fontSize: "16px" }}
+        >
+          Clear
+        </button>
+      </form>
+
+      {searchResults && (
+      <div style={{ display: "flex", "flex-wrap": "wrap", gap: "10px", "justify-content": "center" }}>
+        {searchResults.map((player) => (
+          <button
+            key={player.player_id}
+            onClick={() => setSelectedPlayer(player)}
+          >
+            {player.name}
+          </button>
+        ))}
+      </div>
+      )}
+
       <button
         type="button"
         onClick={() => setIsListOpen((prev) => !prev)}

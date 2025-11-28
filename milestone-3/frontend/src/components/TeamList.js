@@ -10,6 +10,8 @@ const TeamList = () => {
   const [isListOpen, setIsListOpen] = useState(true);
   const [team1Id, setTeam1Id] = useState(null);
   const [team2Id, setTeam2Id] = useState(null);
+  const [team1Name, setTeam1Name] = useState(null);
+  const [team2Name, setTeam2Name] = useState(null);
 
   useEffect(() => {
     const fetchTeams = async () => {
@@ -86,7 +88,7 @@ const TeamList = () => {
       >
         <select
           value={team1Id}
-          onChange={(e) => setTeam1Id(e.target.value)}
+          onChange={(e) => {setTeam1Id(e.target.value)}}
         >
           <option value="">Select Team 1</option>
           {teams.map((team) => (
@@ -110,7 +112,7 @@ const TeamList = () => {
       </div>
 
       {team1Id && team2Id && team1Id !== team2Id && (
-        <TeamMatchups teamId1={team1Id} teamId2={team2Id}/>
+        <TeamMatchups teamId1={team1Id} teamName1={team1Name} teamId2={team2Id} teamName2={team2Name}/>
       )}
     </div>
   );

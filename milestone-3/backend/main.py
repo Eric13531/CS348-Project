@@ -115,6 +115,31 @@ async def get_games():
 
     return {"data": results}
 
+@app.get("/player_search/")
+async def get_player_search(query: str):
+    conn = get_connection()
+    with open("sql/features/advanced/advfeature1b.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (query,))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    
+    for row in results:
+        for key, value in row.items():
+            if isinstance(value, Decimal):
+                row[key] = float(value)
+            
+    return JSONResponse(content={"data": results})
 
 @app.get("/player_averages/")
 async def get_player_advanced_stats(player_id: int):
@@ -198,7 +223,7 @@ async def get_similar_players(player_id: int):
 @app.get("/player_not_score/")
 async def get_player_not_score(player_id: int):
     conn = get_connection()
-    with open("sql/features/advanced/advfeature5.sql", "r") as f:
+    with open("sql/features/advanced/advfeature4.sql", "r") as f:
         sql = f.read()
     
     sql = "\n".join(
@@ -224,7 +249,7 @@ async def get_player_not_score(player_id: int):
 @app.get("/player_best_games/")
 async def get_player_best_games(player_id: int):
     conn = get_connection()
-    with open("sql/features/advanced/advfeature6.sql", "r") as f:
+    with open("sql/features/advanced/advfeature5.sql", "r") as f:
         sql = f.read()
     
     sql = "\n".join(
@@ -245,7 +270,7 @@ async def get_player_best_games(player_id: int):
 @app.get("/player_stats_last_3/")
 async def get_player_stats_last_3(player_id: int):
     conn = get_connection()
-    with open("sql/features/advanced/advfeature8.sql", "r") as f:
+    with open("sql/features/advanced/advfeature7.sql", "r") as f:
         sql = f.read()
     
     sql = "\n".join(
@@ -308,6 +333,28 @@ async def get_team_matchups(team_id1: int, team_id2: int):
     
     cursor = conn.cursor(dictionary=True)
     cursor.execute(sql, (team_id1, team_id2, team_id2, team_id1))
+    results = cursor.fetchall()
+    cursor.close()
+    conn.close()
+            
+    return {"data": results}
+
+@app.get("/team_predict/")
+async def get_team_matchups(team_id1: int, team_id2: int):
+    conn = get_connection()
+    
+    with open("sql/features/advanced/advfeature6b.sql", "r") as f:
+        sql = f.read()
+    
+    sql = "\n".join(
+        line for line in sql.splitlines()
+    )
+    
+    if conn is None:
+        raise HTTPException(status_code=500, detail="Database connection failed")
+    
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(sql, (team_id1, team_id2))
     results = cursor.fetchall()
     cursor.close()
     conn.close()

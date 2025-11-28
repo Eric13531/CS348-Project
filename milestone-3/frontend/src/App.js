@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <h1>NBA Player Stats 2024-25</h1>
-      <p>Backend test: {test}</p>
+      {/* <p>Backend test: {test}</p> */}
       <PlayerList />
       <TeamList />
       <GameList/>
