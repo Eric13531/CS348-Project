@@ -8,7 +8,7 @@ SELECT
     p.height,
     p.position,
     tm.team_id,
-    t.name AS team_name,
+    t.name AS team_name,    
     t.abbreviation,
 
     COUNT(DISTINCT ps.game_id) AS games_played,
