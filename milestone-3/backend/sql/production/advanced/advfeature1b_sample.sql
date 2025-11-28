@@ -5,4 +5,8 @@ SELECT
 FROM Player p
 HAVING relevance > 0
 ORDER BY relevance DESC
-LIMIT 20;
+LIMIT 20
+INTO OUTFILE 'output_file_location'
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';

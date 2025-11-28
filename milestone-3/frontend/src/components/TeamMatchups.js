@@ -13,7 +13,6 @@ const TeamMatchups = ({ teamId1, teamName1, teamId2, teamName2 }) => {
         setMatchups(response.data.data);
         setPredict(response2.data.data[0]);
         console.log("Matchups retrieved for team id:", teamId1, teamId2)
-        console.log(response2.data.data)
       } catch (error) {
         console.error("Error fetching Matchups:", error);
       }

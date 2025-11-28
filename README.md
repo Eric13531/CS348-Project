@@ -34,16 +34,16 @@ We have a sample feature defined in `backend/sql/feature1_sample.sql` which prod
 
 You can also see the player_id and player names of all players in our sample database using `http://127.0.0.1:8000/players/`
 
-
 To create and load the production database, run `backend/sql/production/schema.sql`, then run `backend/database/team_insert.py`, 
 `run backend/database/player_insert.py`, `run backend/database/game_insert.py`, `run backend/database/team_member_insert.py`, 
 `run backend/database/player_stats_insert.py`
 
-feature1.sql, feature2.sql and feature4.sql contain the features we are currently using in out application. They are implemented within the application in
-main.py in the backend and PlayerStats, TeamRecord, TeamRoster in the frontend
+Note: Due to the public API blocking some requests, you must run `python database\player_stats_insert.py 0 100` for all rnages of 100
+up to 1300. There is some commented out directions at the bottom of the file which you may paste into your terminal to load all the player stats data.
 
-We have implemented three features, player averages given player_id, team win-loss record, and team's current roster of players, 
-You can see it by visiting `http://127.0.0.1:8000/player_averages/?player_id=1`
+Because some of our advanced features require additional setup, you should also run `sql/features/advanced/advfeature2.sql`, `sql/features/advanced/advfeature6.sql`
+
+We have implemented all 5 basic features and all 7 advanced features
 
 Running the React app and setting the app URL to `http://127.0.0.1:8000` will run the frontend
 

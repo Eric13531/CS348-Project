@@ -23,7 +23,8 @@ CREATE TABLE Player (
     number INT NULL,
     height VARCHAR(100) NULL,
     position VARCHAR(100) NULL,
-    birthdate DATE NULL
+    birthdate DATE NULL,
+    FULLTEXT INDEX idx_player_name (name)
 );
 
 CREATE TABLE TeamMember (
@@ -51,6 +52,7 @@ CREATE TABLE Game (
 CREATE TABLE PlayerStats (
     game_id INT NOT NULL,
     player_id INT NOT NULL,
+    team_id INT NOT NULL,
     minutes INT DEFAULT NULL,
     points INT DEFAULT NULL,
     three_p INT DEFAULT NULL,
@@ -60,6 +62,7 @@ CREATE TABLE PlayerStats (
 
     PRIMARY KEY (game_id, player_id),
     FOREIGN KEY (game_id) REFERENCES Game(game_id) ON DELETE CASCADE,
-    FOREIGN KEY (player_id) REFERENCES Player(player_id) ON DELETE CASCADE
+    FOREIGN KEY (player_id) REFERENCES Player(player_id) ON DELETE CASCADE,
+    FOREIGN KEY (team_id) REFERENCES Team(team_id) ON DELETE CASCADE
 );
 
