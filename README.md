@@ -51,6 +51,11 @@ Here are the expected results:
 
 ![Screenshot of Players and Stats](screenshots/m2_page2.png)
 ![Screenshot of Players and Stats](screenshots/m2_page1.png)
+![alt text](screenshots/app1.png)
+![alt text](screenshots/app2.png)
+![alt text](screenshots/app3.png)
+![alt text](screenshots/app4.png)
+![alt text](screenshots/app5.png)
 Updated screenshots of the new features can be found in the report
 
 ### 3. Start the Frontend
